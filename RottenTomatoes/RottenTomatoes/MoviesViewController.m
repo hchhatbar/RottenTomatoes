@@ -114,6 +114,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"Row Selected");
+    
+    //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+   // NSString *cellText = cell.textLabel.text;
+ 
+    MovieCell *cell = (MovieCell *) [tableView cellForRowAtIndexPath:indexPath];
+    
+
+    NSLog(@"%@", cell.titleLabel);
+    
     MovieDetailsViewController *detailsViewController = [[MovieDetailsViewController alloc]
                                                          initWithNibName:@"MovieDetailsViewController" bundle:nil];
     [self.navigationController pushViewController:detailsViewController animated:YES];
