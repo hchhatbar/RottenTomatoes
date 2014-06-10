@@ -9,14 +9,20 @@
 #import "MoviesViewController.h"
 #import "MovieDetailsViewController.h"
 #import "MovieCell.h"
-#import "MovieCell.h"
+#import "Movie.h"
 #import <UIImageView+AFNetworking.h>
+#import "MBProgressHUD.h"
 
 
 
 @interface MoviesViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic,strong) NSMutableArray *movies;
+@property (strong, nonatomic) MBProgressHUD *hud;
+@property UIRefreshControl *refreshControl;
+
+- (void)getMovies;
+- (void)onRefresh:(id)sender;
 
 
 @end
@@ -36,8 +42,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib. top_rentals
     
+    UITableViewController *tableViewController = [[UITableViewController alloc] init];
+    tableViewController.tableView = self.tableView;
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(onRefresh:) forControlEvents:UIControlEventValueChanged];
+    
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refreshing data..."];
+    
+    tableViewController.refreshControl = self.refreshControl;
+  //  [self.tableView addSubview:refreshControl];
+    
+    
+    [self getMovies];
+ 
+   
+}
+
+- (void)onRefresh:(id)sender
+{
+    [self getMovies];
+    [self.refreshControl endRefreshing];
+    
+}
+
+-(void)getMovies{
+
+    self.hud = [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [self.hud setDimBackground:YES];
     
     NSString *url = @"http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=g9au4hv6khv6wzvzgt55gpqs";
     
@@ -51,16 +84,17 @@
         
         [self.tableView reloadData];
     }];
-     
+    
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 130;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"MovieCell" bundle:nil] forCellReuseIdentifier: @"MovieCell"];
     
     [self.tableView setDelegate:self];
+    //[self.hud hide:YES];
+    [self.hud hide:YES afterDelay:1.0];
 }
 
-    
 
 - (void)didReceiveMemoryWarning
 {
@@ -89,43 +123,71 @@
     NSDictionary *moviePosters = movie[@"posters"];
      NSLog(@"%@", moviePosters[@"detailed"]);
     
+    //NSURL   *imageURL   = [NSURL URLWithString:moviePosters[@"profile"]];
+    //NSData  *imageData  = [NSData dataWithContentsOfURL:imageURL];
+    //UIImage *image      = [UIImage imageWithData:imageData];
+
+    //movieCell.postView.image = image;
+    
+    //Asynchronously load the image
     NSURL   *imageURL   = [NSURL URLWithString:moviePosters[@"profile"]];
-    NSData  *imageData  = [NSData dataWithContentsOfURL:imageURL];
-    UIImage *image      = [UIImage imageWithData:imageData];
-    movieCell.postView.image = image;
+    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+     UIImage *placeholderImage = [UIImage imageNamed:@"movie_placeholder.jpeg"];
     
+     __weak UITableViewCell *weakCell = movieCell;
     
-/*    [movieCell.imageView setImageWithURL:[NSURL URLWithString:moviePosters[@"profile"]]
-              placeholderImage:[UIImage imageNamed:@"movie_placeholder.jpeg"]
-                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                           [UIView transitionWithView:self.imageView
-                                             duration:0.3
-                                              options:UIViewAnimationOptionTransitionCrossDissolve
-                                           animations:^{
-                                               self.imageView.image = image;
-                                           }
-                                           completion:NULL];
-                       }
-                       failure:NULL]; */
+    [movieCell.imageView setImageWithURLRequest:request
+                          placeholderImage:placeholderImage
+                                   success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                       
+                                       weakCell.imageView.image = image;
+                                       [weakCell setNeedsLayout];
+                                       
+                                   } failure:nil];
     
     return movieCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Row Selected");
+    NSDictionary *selMovie = [self.movies objectAtIndex:indexPath.row];
+   
+    //Movie *selectedMovie = [[Movie alloc] initWithDictionary:selMovie];
+    
+    //selectedMovie = [self.movies objectAtIndex:indexPath.row];
+    //selectedMovie.title = selMovie[@"title"];
+    
+    NSLog(@"%@", selMovie[@"title"]);
+    
+    //NSDictionary *moviePosters = selectedMovie[@"posters"];
+    //NSLog(@"%@", moviePosters[@"detailed"]);
+    
+    //NSURL   *imageURL   = [NSURL URLWithString:moviePosters[@"profile"]];
+    //NSData  *imageData  = [NSData dataWithContentsOfURL:imageURL];
+    //UIImage *image      = [UIImage imageWithData:imageData];
+    
+    
+    MovieDetailsViewController *detailsViewController = [[MovieDetailsViewController alloc]                                                        initWithNibName:@"MovieDetailsViewController" bundle:nil];
+    
+   
+    
+        [self.navigationController pushViewController:detailsViewController animated:YES];
+    
+     detailsViewController.movieTitle = selMovie[@"title"];
+   
+//    movieCell.postView.image = image;
     
     //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
    // NSString *cellText = cell.textLabel.text;
  
-    MovieCell *cell = (MovieCell *) [tableView cellForRowAtIndexPath:indexPath];
+    /*MovieCell *cell = (MovieCell *) [tableView cellForRowAtIndexPath:indexPath];
     
 
     NSLog(@"%@", cell.titleLabel);
     
     MovieDetailsViewController *detailsViewController = [[MovieDetailsViewController alloc]
                                                          initWithNibName:@"MovieDetailsViewController" bundle:nil];
-    [self.navigationController pushViewController:detailsViewController animated:YES];
+    [self.navigationController pushViewController:detailsViewController animated:YES];*/
     
 }
 
