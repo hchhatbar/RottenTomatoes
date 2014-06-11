@@ -29,6 +29,8 @@
 		9FFAA3A71945926E00BC7A2D /* MovieDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFAA3A51945926E00BC7A2D /* MovieDetailsViewController.m */; };
 		9FFAA3A81945926E00BC7A2D /* MovieDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFAA3A61945926E00BC7A2D /* MovieDetailsViewController.xib */; };
 		9FFAA3AB1945AC3B00BC7A2D /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFAA3AA1945AC3B00BC7A2D /* Movie.m */; };
+		9FFAA3B71947EEB900BC7A2D /* box_office.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFAA3B61947EEB900BC7A2D /* box_office.png */; };
+		9FFAA3B91947EEC500BC7A2D /* dvd.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FFAA3B81947EEC500BC7A2D /* dvd.png */; };
 		F35403DEC0D441008201971F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB1C200F46B405B820F6BC2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +78,8 @@
 		9FFAA3A61945926E00BC7A2D /* MovieDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieDetailsViewController.xib; sourceTree = "<group>"; };
 		9FFAA3A91945AC3B00BC7A2D /* Movie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
 		9FFAA3AA1945AC3B00BC7A2D /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
+		9FFAA3B61947EEB900BC7A2D /* box_office.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box_office.png; sourceTree = "<group>"; };
+		9FFAA3B81947EEC500BC7A2D /* dvd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dvd.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,8 @@
 		9FFAA3611941A8F600BC7A2D /* RottenTomatoes */ = {
 			isa = PBXGroup;
 			children = (
+				9FFAA3B81947EEC500BC7A2D /* dvd.png */,
+				9FFAA3B61947EEB900BC7A2D /* box_office.png */,
 				9FFAA3A219451E9200BC7A2D /* movie_placeholder.jpeg */,
 				9FFAA3951942D0B300BC7A2D /* Models */,
 				9FFAA3941942D08900BC7A2D /* ViewControllers */,
@@ -291,11 +297,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FFAA3B91947EEC500BC7A2D /* dvd.png in Resources */,
 				9FFAA3A1194397CB00BC7A2D /* DVDViewController.xib in Resources */,
 				9FFAA3661941A8F600BC7A2D /* InfoPlist.strings in Resources */,
 				9FFAA3A319451E9200BC7A2D /* movie_placeholder.jpeg in Resources */,
 				9FFAA3911942836B00BC7A2D /* MoviesViewController.xib in Resources */,
 				9FFAA3A81945926E00BC7A2D /* MovieDetailsViewController.xib in Resources */,
+				9FFAA3B71947EEB900BC7A2D /* box_office.png in Resources */,
 				9FFAA39C1942E8B900BC7A2D /* MovieCell.xib in Resources */,
 				9FFAA36E1941A8F700BC7A2D /* Images.xcassets in Resources */,
 			);

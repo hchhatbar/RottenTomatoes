@@ -11,13 +11,16 @@
 @interface MovieDetailsViewController : UIViewController
 
 
-@property (nonatomic, retain) NSString* movieTitle;
-
-
 @property (weak, nonatomic) IBOutlet UIImageView *posterView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *ratingsLable;
 @property (weak, nonatomic) IBOutlet UILabel *synopsisLable;
+
+@property NSString *imageURL;
+@property (nonatomic, retain) NSString* movieTitle;
+@property (nonatomic, retain) NSString* synopsis;
+@property (nonatomic, retain) NSString* ratings;
+
 
 @end

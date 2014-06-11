@@ -23,9 +23,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.titleLabel.text = @"TTTTTT";
-        self.synopsisLable.text =@"synopsis....";
-        self.ratingsLable.text = @"ratings...";
+        
+        //self.titleLabel.text = @"TTTTTT";
+        //self.synopsisLable.text =@"synopsis....";
+        //self.ratingsLable.text = @"ratings...";
         
     }
     return self;
@@ -36,16 +37,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //self.posterView = self.recipe.name;
-	self.titleLabel.text = @"TTTTTT";
-    self.synopsisLable.text = self.movieTitle;
-    self.ratingsLable.text = @"ratings...";
+	
+    self.synopsisLable.text = self.synopsis;
+    self.ratingsLable.text = self.movieTitle;
+    //self.titleLabel.text = self.movieTitle;
+    
     //self.movieTitle;
-    NSLog(@"viewDidLoad");
+    NSLog(@"imageURL");
     
-     NSLog(@"%@", self.movieTitle);
+     NSLog(@"%@", self.imageURL);
     
-	//self.instructionsTextView.text = self.recipe.instructions;
+    NSURL   *image   = [NSURL URLWithString:self.imageURL];
+    NSData * imageData = [NSData dataWithContentsOfURL:image];
+    UIImage *img = [UIImage imageWithData:imageData];
     
+    self.posterView.image = img;
+  
 }
 
 - (void)didReceiveMemoryWarning

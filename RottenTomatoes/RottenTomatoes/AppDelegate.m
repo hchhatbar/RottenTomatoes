@@ -18,17 +18,8 @@
     // Override point for customization after application launch.
     
     
-    /*MoviesViewController *vc = [[MoviesViewController alloc] init];
     
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-    self.window.rootViewController = nvc;
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    return YES; */
-    
-    
-    
-    // Create the two view controllers, each within a navigation controller
+    // Two view controllers, each within a navigation controller
     MoviesViewController *firstViewController = [[MoviesViewController alloc] init];
     UINavigationController *firstNavigationController = [[UINavigationController alloc] initWithRootViewController:firstViewController];
     
@@ -39,13 +30,18 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[firstNavigationController, secondNavigationController];
     
-    // Configure the titles and images of the tab bar items
-    firstNavigationController.tabBarItem.title = @"Box Office";
-    //firstNavigationController.tabBarItem.image = [UIImage imageNamed:@"House"];
     
-    secondNavigationController.tabBarItem.title = @"DVD";
-    //secondNavigationController.tabBarItem.image = [UIImage imageNamed:@"Martini"];
+    UITabBar *tabBar = tabBarController.tabBar;
+    UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
+   
+    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
     
+    
+      [tabBarItem1 setFinishedSelectedImage:[UIImage imageNamed:@"box_office.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"box_office.png"]];
+    
+     [tabBarItem2 setFinishedSelectedImage:[UIImage imageNamed:@"dvd.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"dvd.png"]];
+    
+     tabBarController.navigationItem.title = @"Box Office";
     self.window.rootViewController = tabBarController;
     
     self.window.backgroundColor = [UIColor whiteColor];
