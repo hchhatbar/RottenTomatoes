@@ -15,7 +15,8 @@ Optional
 Implemented tab bar for Box Office and DVD (dvd view is not implemented).
 
 
-![Alt text](https://github.com/hchhatbar/RottenTomatoes/blob/master/rotten_tomatoes.gif "Rotten Tomatoes")
+![Alt text](https://raw.githubusercontent.com/hchhatbar/RottenTomatoes/master/rotten_tomatoes.gif "Rotten Tomatoes")
+
 
 
 
